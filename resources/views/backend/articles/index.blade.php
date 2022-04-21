@@ -41,7 +41,7 @@
                   </span>
                 </td>
                 <td>
-                  <span class="badge bg-primary">{{ $article->users->name }}</span>
+                  <span class="badge bg-primary">{{ $article->user->name }}</span>
                 </td>
                 <td>
                   <div class="btn-group" role="group">

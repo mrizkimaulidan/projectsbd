@@ -13,12 +13,12 @@ class Article extends Model
 
     protected $fillable = ['user_id', 'title', 'slug', 'body', 'thumbnail', 'is_active', 'published_at'];
 
-    public function users(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function comments()
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class, 'article_id');
     }

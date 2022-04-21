@@ -19,7 +19,7 @@ class ArticleController extends Controller
      */
     public function index(): View
     {
-        $articles = Article::with(['users:id,name'])->select(['id', 'user_id', 'title', 'thumbnail', 'is_active'])->latest()->paginate(5);
+        $articles = Article::with(['user:id,name'])->select(['id', 'user_id', 'title', 'thumbnail', 'is_active'])->latest()->paginate(5);
 
         return view('backend.articles.index', compact('articles'));
     }

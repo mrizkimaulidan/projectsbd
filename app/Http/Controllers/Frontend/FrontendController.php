@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Gallery;
 use App\Models\Slider;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class FrontendController extends Controller
