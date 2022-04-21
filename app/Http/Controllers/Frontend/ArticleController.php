@@ -10,6 +10,11 @@ use Illuminate\View\View;
 
 class ArticleController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index(): View
     {
         $articles = Article::with('users:id,name')
@@ -21,6 +26,12 @@ class ArticleController extends Controller
         return view('frontend.articles.index', compact('articles'));
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Article  $article
+     * @return \Illuminate\Http\Response
+     */
     public function show(Article $article): View
     {
         $randomArticles = Article::select(['id', 'title', 'slug', 'body', 'thumbnail', 'is_active'])->where('is_active', 1)->inRandomOrder(3)->get();

@@ -7,10 +7,16 @@ use App\Models\Article;
 use App\Models\Gallery;
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class FrontendController extends Controller
 {
-    public function index()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index(): View
     {
         $sliders = Slider::select(['title', 'description', 'image', 'is_active'])->where('is_active', 1)->get();
         $articleLimit2 = Article::select(['title', 'slug', 'body', 'thumbnail', 'is_active'])->latest()->limit(2)->get();
