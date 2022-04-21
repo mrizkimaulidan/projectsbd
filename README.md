@@ -16,6 +16,12 @@ SSH
 git@github.com:mrizkimaulidan/projectsbd.git
 ```
 
+Masuk ke foldernya
+
+```bash
+cd projectsbd/
+```
+
 -   Install seluruh packages yang dibutuhkan
 
 ```bash
@@ -28,6 +34,12 @@ composer install
 
 ```bash
 php artisan migrate --seed
+```
+
+Generate APP_KEY dengan perintah di bawah ini
+
+```bash
+php artisan key:generate
 ```
 
 -   Ketik perintah dibawah ini untuk membuat cache baru dari beberapa konfigurasi yang telah diubah
