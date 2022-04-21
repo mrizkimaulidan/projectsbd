@@ -6,26 +6,32 @@
 
 HTTPS
 
-```
-https://github.com/mrizkimaulidan/projectsbd.git
+```bash
+$ git clone https://github.com/mrizkimaulidan/projectsbd.git
 ```
 
 SSH
 
 ```
-git@github.com:mrizkimaulidan/projectsbd.git
+$ git clone git@github.com:mrizkimaulidan/projectsbd.git
 ```
 
-Masuk ke foldernya
+-   Masuk ke foldernya
 
 ```bash
-cd projectsbd/
+$ cd projectsbd/
 ```
 
 -   Install seluruh packages yang dibutuhkan
 
 ```bash
-composer install
+$ composer install
+```
+
+-   Copy file .env.example dan ubah namanya menjadi `.env`
+
+```bash
+$ cp .env.example .env
 ```
 
 -   Siapkan database dan atur file .env sesuai dengan konfigurasi Anda
@@ -33,25 +39,25 @@ composer install
 -   Jika sudah, migrate seluruh migrasi dan seeding data
 
 ```bash
-php artisan migrate --seed
+$ php artisan migrate --seed
 ```
 
-Generate APP_KEY dengan perintah di bawah ini
+-   Generate APP_KEY dengan perintah di bawah ini
 
 ```bash
-php artisan key:generate
+$ php artisan key:generate
 ```
 
 -   Ketik perintah dibawah ini untuk membuat cache baru dari beberapa konfigurasi yang telah diubah
 
 ```bash
-php artisan optimize
+$ php artisan optimize
 ```
 
 -   Jalankan local server
 
 ```bash
-php artisan serve
+$ php artisan serve
 ```
 
 -   _(Opsional)_ Secara default debugbar akan aktif, untuk menonaktifkannnya cari variabel `DEBUGBAR_ENABLED` pada file .env dan ubah valuenya menjadi `false`
