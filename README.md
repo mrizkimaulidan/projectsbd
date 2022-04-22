@@ -1,5 +1,7 @@
 # ProjectSBD
 
+Aplikasi untuk memenuhi tugas mata kuliah Sistem Basis Data dengan case pembuatan website pengumuman online.
+
 ### Langkah-langkah instalasi
 
 -   Clone repository ini
@@ -12,7 +14,7 @@ $ git clone https://github.com/mrizkimaulidan/projectsbd.git
 
 SSH
 
-```
+```bash
 $ git clone git@github.com:mrizkimaulidan/projectsbd.git
 ```
 
@@ -35,7 +37,7 @@ $ cp .env.example .env
 ```
 
 -   Siapkan database dan atur file .env sesuai dengan konfigurasi Anda
--   Ubah value APP_NAME= pada file .env menjadi nama aplikasi yang anda inginkan
+-   Ubah value APP_NAME= pada file .env menjadi nama aplikasi yang Anda inginkan
 -   Jika sudah, migrate seluruh migrasi dan seeding data
 
 ```bash
