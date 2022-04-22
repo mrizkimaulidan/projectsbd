@@ -6,12 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGalleryRequest;
 use App\Http\Requests\UpdateGalleryRequest;
 use App\Models\Gallery;
+use App\Repositories\FileStorageRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
+    public function __construct(
+        private FileStorageRepository $fileStorageRepository
+    ) {
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -45,11 +51,9 @@ class GalleryController extends Controller
         $input = $request->validated();
 
         if ($request->file('image')) {
-            $file = $request->file('image');
+            $fileName = $this->fileStorageRepository->uploadTo($request, 'image', 'local', 'public/galleries');
 
-            Storage::putFile('public/galleries', $file);
-
-            $input['image'] = $file->hashName();
+            $input['image'] = $fileName;
         }
 
         Gallery::create($input);
@@ -93,15 +97,11 @@ class GalleryController extends Controller
         if ($request->file('image')) {
             $path = 'public/galleries/' . $gallery->image;
 
-            if (Storage::get($path)) {
-                Storage::delete($path);
-            }
+            $this->fileStorageRepository->remove($path);
 
-            $file = $request->file('image');
+            $fileName = $this->fileStorageRepository->uploadTo($request, 'image', 'local', 'public/galleries');
 
-            Storage::putFile('public/galleries', $file);
-
-            $input['image'] = $file->hashName();
+            $input['image'] = $fileName;
         }
 
         $gallery->update($input);
@@ -119,9 +119,7 @@ class GalleryController extends Controller
     {
         $path = 'public/galleries/' . $gallery->image;
 
-        if (Storage::get($path)) {
-            Storage::delete($path);
-        }
+        $this->fileStorageRepository->remove($path);
 
         $gallery->delete();
 

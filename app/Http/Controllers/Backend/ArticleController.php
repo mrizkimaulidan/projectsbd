@@ -6,12 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
+use App\Repositories\FileStorageRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ArticleController extends Controller
 {
+    public function __construct(
+        private FileStorageRepository $fileStorageRepository
+    ) {
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -48,11 +54,9 @@ class ArticleController extends Controller
         $input['published_at'] = now();
 
         if ($request->file('thumbnail')) {
-            $file = $request->file('thumbnail');
+            $fileName = $this->fileStorageRepository->uploadTo($request, 'thumbnail', 'local', 'public/articles');
 
-            Storage::putFile('public/articles', $file);
-
-            $input['thumbnail'] = $file->hashName();
+            $input['thumbnail'] = $fileName;
         }
 
         Article::create($input);
@@ -96,15 +100,11 @@ class ArticleController extends Controller
         if ($request->file('thumbnail')) {
             $path = 'public/articles/' . $article->thumbnail;
 
-            if (Storage::get($path)) {
-                Storage::delete($path);
-            }
+            $this->fileStorageRepository->remove($path);
 
-            $file = $request->file('thumbnail');
+            $fileName = $this->fileStorageRepository->uploadTo($request, 'thumbnail', 'local', 'public/articles');
 
-            Storage::putFile('public/articles', $file);
-
-            $input['thumbnail'] = $file->hashName();
+            $input['thumbnail'] = $fileName;
         }
 
         $article->update($input);
@@ -122,9 +122,7 @@ class ArticleController extends Controller
     {
         $path = 'public/sliders/' . $article->thumbnail;
 
-        if (Storage::get($path)) {
-            Storage::delete($path);
-        }
+        $this->fileStorageRepository->remove($path);
 
         $article->delete();
 

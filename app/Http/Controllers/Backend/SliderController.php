@@ -6,12 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSliderRequest;
 use App\Http\Requests\UpdateSliderRequest;
 use App\Models\Slider;
+use App\Repositories\FileStorageRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class SliderController extends Controller
 {
+    public function __construct(
+        private FileStorageRepository $fileStorageRepository
+    ) {
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -45,11 +51,9 @@ class SliderController extends Controller
         $input = $request->validated();
 
         if ($request->file('image')) {
-            $file = $request->file('image');
+            $fileName = $this->fileStorageRepository->uploadTo($request, 'image', 'local', 'public/sliders');
 
-            Storage::putFile('public/sliders', $file);
-
-            $input['image'] = $file->hashName();
+            $input['image'] = $fileName;
         }
 
         Slider::create($input);
@@ -93,15 +97,13 @@ class SliderController extends Controller
         if ($request->file('image')) {
             $path = 'public/sliders/' . $slider->image;
 
-            if (Storage::get($path)) {
-                Storage::delete($path);
-            }
+            // remove the old file
+            $this->fileStorageRepository->remove($path);
 
-            $file = $request->file('image');
+            // upload the new file.
+            $fileName = $fileName = $this->fileStorageRepository->uploadTo($request, 'image', 'local', 'public/sliders');
 
-            Storage::putFile('public/sliders', $file);
-
-            $input['image'] = $file->hashName();
+            $input['image'] = $fileName;
         }
 
         $slider->update($input);
@@ -119,9 +121,7 @@ class SliderController extends Controller
     {
         $path = 'public/sliders/' . $slider->image;
 
-        if (Storage::get($path)) {
-            Storage::delete($path);
-        }
+        $this->fileStorageRepository->remove($path);
 
         $slider->delete();
 
