@@ -57,29 +57,6 @@
             </p>
           </a>
         </li>
-        {{-- <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
-            <p>
-              Starter Pages
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Active Page</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Inactive Page</p>
-              </a>
-            </li>
-          </ul>
-        </li> --}}
         <li class="nav-item {{ request()->routeIs('backend.comments.*') ? 'menu-open' : '' }}">
           <a href="#" class="nav-link {{ request()->routeIs('backend.comments.*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-comments"></i>
@@ -105,15 +82,6 @@
             </li>
           </ul>
         </li>
-        {{-- <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
-            <p>
-              Simple Link
-              <span class="right badge badge-danger">New</span>
-            </p>
-          </a>
-        </li> --}}
         <li class="nav-item">
           <a href="{{ route('backend.users.index') }}"
             class="nav-link {{ request()->routeIs('backend.users.*') ? 'active' : '' }}">
