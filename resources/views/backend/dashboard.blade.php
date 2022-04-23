@@ -94,7 +94,7 @@
             <div id="collapse{{ $loop->iteration }}" class="collapse" aria-labelledby="heading{{ $loop->iteration }}"
               data-parent="#accordionNewestComment">
               <div class="card-body">
-                <h5>{{ str()->limit($comment->article->title, 50) }}</h5>
+                <h6 class="fw-bold">{{ str()->limit($comment->article->title, 50) }}</h6>
 
                 {{ str()->limit($comment->body, 50) }}
                 <div class="pt-3">
