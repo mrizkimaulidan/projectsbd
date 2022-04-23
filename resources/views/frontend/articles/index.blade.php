@@ -46,11 +46,11 @@
       </a>
       @endforeach
     </div>
-    @empty($articles['data'])
+    @if($articles->isEmpty())
     <div class="d-flex justify-content-center">
       <div class="text-uppercase text-danger fw-bold">Daftar Artikel Masih Kosong</div>
     </div>
-    @endempty
+    @endif
 
     <div class="pt-3 d-flex justify-content-center">
       {{ $articles->links('pagination::bootstrap-5') }}
