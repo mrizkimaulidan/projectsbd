@@ -22,7 +22,7 @@
   </div>
   @if($galleries->isEmpty())
   <div class="d-flex justify-content-center">
-    <div class="text-uppercase text-danger fw-bold">Daftar Artikel Masih Kosong</div>
+    <div class="text-uppercase text-danger fw-bold">Daftar Galeri Masih Kosong</div>
   </div>
   @endif
   <div class="pt-3 d-flex justify-content-center">
