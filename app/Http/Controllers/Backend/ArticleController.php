@@ -72,7 +72,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        abort(404);
     }
 
     /**

@@ -32,7 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -60,7 +60,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -105,6 +105,6 @@ class UserController extends Controller
      */
     public function destroy(User $user): void
     {
-        //
+        abort(404);
     }
 }
