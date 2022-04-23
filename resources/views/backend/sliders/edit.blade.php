@@ -1,4 +1,4 @@
-@extends('backend.layouts.app', ['title' => 'Ubah Slider ' . $slider->title])
+@extends('backend.layouts.app', ['title' => 'Ubah Slider'])
 
 @section('content')
 <div class="row">
