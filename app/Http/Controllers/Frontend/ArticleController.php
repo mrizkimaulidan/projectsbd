@@ -15,11 +15,16 @@ class ArticleController extends Controller
      */
     public function index(): View
     {
-        $articles = Article::with('user:id,name')
-            ->select(['user_id', 'title', 'slug', 'body', 'thumbnail', 'is_active', 'views', 'published_at'])
-            ->where('is_active', 1)
-            ->latest()
-            ->paginate(9);
+        $articles = Article::with(['user:id,name'])
+            ->select(['user_id', 'title', 'slug', 'body', 'thumbnail', 'is_active', 'views', 'published_at'])->latest();
+
+        if (request()->has('search')) {
+            $articles = $articles->where('title', 'LIKE', '%' . request()->search . '%')
+                ->orWhere('body', 'LIKE', '%' . request()->search . '%')
+                ->paginate(9);
+        } else {
+            $articles = $articles->where('is_active', 1)->paginate(9);
+        }
 
         return view('frontend.articles.index', compact('articles'));
     }

@@ -4,13 +4,19 @@
 <section id="search-bar">
   <div class="container" style="padding-top: 100px;">
     <h2 class="text-center fw-bold text-uppercase">Daftar Seluruh Artikel</h2>
-    <div class="input-group pt-5 mb-3">
-      <input type="text" class="form-control" placeholder="Masukkan keyword pencarian.." autofocus>
+    <form action="" method="GET">
+      <div class="input-group pt-5 mb-3">
+        <input type="text" class="form-control" name="search" placeholder="Masukkan keyword pencarian.." autofocus>
 
-      <button class="btn btn-secondary" type="button" id="button-addon2">
-        <i class="bi bi-search"></i> Cari
-      </button>
-    </div>
+        <button type="submit" class="btn btn-secondary" id="button-addon2">
+          <i class="bi bi-search"></i> Cari
+        </button>
+      </div>
+    </form>
+
+    @if(request()->has('search'))
+    <small class="fw-bold">Ditemukan {{ $articles->count() }} artikel dengan kata kunci yang dicari</small>
+    @endif
   </div>
 </section>
 
