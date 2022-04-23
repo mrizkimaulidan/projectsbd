@@ -15,7 +15,7 @@ class ArticleController extends Controller
      */
     public function index(): View
     {
-        $articles = Article::with('users:id,name')
+        $articles = Article::with('user:id,name')
             ->select(['user_id', 'title', 'slug', 'body', 'thumbnail', 'is_active', 'views', 'published_at'])
             ->where('is_active', 1)
             ->latest()

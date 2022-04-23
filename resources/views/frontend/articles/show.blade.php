@@ -9,7 +9,7 @@
           <img src="{{ asset('storage/articles/' . $article->thumbnail) }}" class="img-fluid" alt="">
           <div class="title">
             <h5 class="fw-bold pt-3">{{ $article->title }}</h5>
-            <small class="text-muted"><i class="bi bi-person-circle"></i> {{ $article->users->name }}</small>
+            <small class="text-muted"><i class="bi bi-person-circle"></i> {{ $article->user->name }}</small>
             <small class="text-muted"><i class="bi bi-clock"></i> {{ date('d-m-Y', strtotime($article->published_at))
               }}</small>
 

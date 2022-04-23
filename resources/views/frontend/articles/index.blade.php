@@ -24,7 +24,7 @@
             <img src="{{ asset('storage/articles/' . $article->thumbnail) }}" class="card-img-top"
               alt="{{ $article->title }}">
             <div class="card-body">
-              <small class="text-muted"><i class="bi bi-person-circle text-success"></i> {{ $article->users->name
+              <small class="text-muted"><i class="bi bi-person-circle text-success"></i> {{ $article->user->name
                 }}</small>
               <div class="float-end">
                 <small class="text-muted"><i class="bi bi-clock text-success"></i> {{ date('d-m-Y',
