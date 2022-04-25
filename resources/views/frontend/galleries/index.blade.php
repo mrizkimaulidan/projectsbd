@@ -14,7 +14,7 @@
       <div class="col-lg-3">
         <div data-src="{{ asset('storage/galleries/' . $gallery->image) }}" class="item"
           data-sub-html="<h4>{{ $gallery->title }}</h4><p>{{ $gallery->description }}</p>">
-          <img src="{{ asset('storage/galleries/' . $gallery->image) }}" class="img-thumbnail" />
+          <img src="{{ asset('storage/galleries/' . $gallery->image) }}" class="my-2 img-thumbnail" />
         </div>
       </div>
       @endforeach
