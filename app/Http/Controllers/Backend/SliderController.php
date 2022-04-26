@@ -48,15 +48,15 @@ class SliderController extends Controller
      */
     public function store(StoreSliderRequest $request): RedirectResponse
     {
-        $input = $request->validated();
+        $validated = $request->validated();
 
         if ($request->file('image')) {
             $fileName = $this->fileStorageRepository->uploadTo($request, 'image', 'local', 'public/sliders');
 
-            $input['image'] = $fileName;
+            $validated['image'] = $fileName;
         }
 
-        Slider::create($input);
+        Slider::create($validated);
 
         return redirect()->route('backend.sliders.index')->with('success', 'Data berhasil ditambahkan!');
     }
@@ -92,7 +92,7 @@ class SliderController extends Controller
      */
     public function update(UpdateSliderRequest $request, Slider $slider): RedirectResponse
     {
-        $input = $request->validated();
+        $validated = $request->validated();
 
         if ($request->file('image')) {
             $path = 'public/sliders/' . $slider->image;
@@ -103,10 +103,10 @@ class SliderController extends Controller
             // upload the new file.
             $fileName = $fileName = $this->fileStorageRepository->uploadTo($request, 'image', 'local', 'public/sliders');
 
-            $input['image'] = $fileName;
+            $validated['image'] = $fileName;
         }
 
-        $slider->update($input);
+        $slider->update($validated);
 
         return redirect()->route('backend.sliders.edit', $slider->id)->with('success', 'Data berhasil diubah!');
     }

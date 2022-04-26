@@ -48,18 +48,16 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request): RedirectResponse
     {
-        $input = $request->validated();
-
-        $input['user_id'] = auth()->id();
-        $input['published_at'] = now();
+        $validated = $request->validated();
+        $validated['user_id'] = auth()->id();
 
         if ($request->file('thumbnail')) {
             $fileName = $this->fileStorageRepository->uploadTo($request, 'thumbnail', 'local', 'public/articles');
 
-            $input['thumbnail'] = $fileName;
+            $validated['thumbnail'] = $fileName;
         }
 
-        Article::create($input);
+        Article::create($validated);
 
         return redirect()->route('backend.articles.index')->with('success', 'Data berhasil ditambahkan!');
     }
@@ -95,7 +93,7 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
-        $input = $request->validated();
+        $validated = $request->validated();
 
         if ($request->file('thumbnail')) {
             $path = 'public/articles/' . $article->thumbnail;
@@ -104,10 +102,10 @@ class ArticleController extends Controller
 
             $fileName = $this->fileStorageRepository->uploadTo($request, 'thumbnail', 'local', 'public/articles');
 
-            $input['thumbnail'] = $fileName;
+            $validated['thumbnail'] = $fileName;
         }
 
-        $article->update($input);
+        $article->update($validated);
 
         return redirect()->route('backend.articles.edit', $article->id)->with('success', 'Data berhasil diubah!');
     }
