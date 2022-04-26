@@ -13,11 +13,13 @@
 
           <div class="form-group">
             <label for="name">Nama Lengkap :</label>
-            <input type="text" name="name" class="form-control" id="name" placeholder="Masukkan nama lengkap..">
+            <input type="text" name="name" value="{{ old('name') }}" class="form-control" id="name"
+              placeholder="Masukkan nama lengkap..">
           </div>
           <div class="form-group">
             <label for="email">Email :</label>
-            <input type="email" name="email" class="form-control" id="email" placeholder="Masukkan alamat email..">
+            <input type="email" name="email" value="{{ old('email') }}" class="form-control" id="email"
+              placeholder="Masukkan alamat email..">
           </div>
           <div class="form-group">
             <label for="password">Password :</label>
