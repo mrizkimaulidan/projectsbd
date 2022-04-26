@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('thumbnail');
             $table->boolean('is_active');
             $table->unsignedBigInteger('views')->default(0);
-            $table->timestamp('published_at');
+            $table->timestamp('published_at')->useCurrent();
             $table->timestamps();
         });
     }
