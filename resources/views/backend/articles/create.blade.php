@@ -20,7 +20,7 @@
               <div class="mb-3">
                 <label for="slug" class="form-label">Slug :</label>
                 <input type="text" name="slug" id="slug" class="form-control"
-                  placeholder="Slug akan terbuat otomatis sesuai dengan judul.." readonly>
+                  placeholder="Slug akan terbuat otomatis sesuai dengan judul.." value="{{ old('slug') }}" readonly>
               </div>
             </div>
           </div>
@@ -31,8 +31,8 @@
                 <label for="is_active">Aktif/Tidak Aktif :</label>
                 <select name="is_active" id="is_active" class="form-select">
                   <option value="">Pilih..</option>
-                  <option value="1">Aktif</option>
-                  <option value="0">Tidak Aktif</option>
+                  <option value="1" @selected(old('is_active')==1)>Aktif</option>
+                  <option value="0" @selected(old('is_active')==0)>Tidak Aktif</option>
                 </select>
               </div>
             </div>
@@ -57,7 +57,8 @@
 
           <div class="mb-3">
             <label for="body" class="form-label">Konten :</label>
-            <textarea name="body" id="body" rows="5" class="form-control" placeholder="Masukkan konten.."></textarea>
+            <textarea name="body" id="body" rows="5" class="form-control"
+              placeholder="Masukkan konten..">{{ old('body') }}</textarea>
           </div>
           <a href="{{ route('backend.articles.index') }}" class="btn btn-secondary">Kembali</a>
           <button type="submit" class="btn btn-primary">Tambah</button>
