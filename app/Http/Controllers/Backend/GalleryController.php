@@ -48,15 +48,15 @@ class GalleryController extends Controller
      */
     public function store(StoreGalleryRequest $request): RedirectResponse
     {
-        $input = $request->validated();
+        $validated = $request->validated();
 
         if ($request->file('image')) {
             $fileName = $this->fileStorageRepository->uploadTo($request, 'image', 'local', 'public/galleries');
 
-            $input['image'] = $fileName;
+            $validated['image'] = $fileName;
         }
 
-        Gallery::create($input);
+        Gallery::create($validated);
 
         return redirect()->route('backend.galleries.index')->with('success', 'Data berhasil ditambahkan!');
     }
@@ -92,7 +92,7 @@ class GalleryController extends Controller
      */
     public function update(UpdateGalleryRequest $request, Gallery $gallery): RedirectResponse
     {
-        $input = $request->validated();
+        $validated = $request->validated();
 
         if ($request->file('image')) {
             $path = 'public/galleries/' . $gallery->image;
@@ -101,10 +101,10 @@ class GalleryController extends Controller
 
             $fileName = $this->fileStorageRepository->uploadTo($request, 'image', 'local', 'public/galleries');
 
-            $input['image'] = $fileName;
+            $validated['image'] = $fileName;
         }
 
-        $gallery->update($input);
+        $gallery->update($validated);
 
         return redirect()->route('backend.galleries.edit', $gallery->id)->with('success', 'Data berhasil diubah!');
     }
@@ -118,7 +118,6 @@ class GalleryController extends Controller
     public function destroy(Gallery $gallery): RedirectResponse
     {
         $path = 'public/galleries/' . $gallery->image;
-
         $this->fileStorageRepository->remove($path);
 
         $gallery->delete();

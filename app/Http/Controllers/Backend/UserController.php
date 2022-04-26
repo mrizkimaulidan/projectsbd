@@ -43,11 +43,11 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request): RedirectResponse
     {
-        $input = $request->validated();
+        $validated = $request->validated();
 
-        $input['password'] = bcrypt($input['password']);
+        $validated['password'] = bcrypt($validated['password']);
 
-        User::create($input);
+        User::create($validated);
 
         return redirect()->route('backend.users.index')->with('success', 'Data berhasil ditambahkan!');
     }
@@ -86,12 +86,12 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $input = $request->validated();
+        $validated = $request->validated();
 
         $user->update([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'password' => is_null($input['password']) ? $user->password : bcrypt($input['password'])
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => is_null($validated['password']) ? $user->password : bcrypt($validated['password'])
         ]);
 
         return redirect()->route('backend.users.index')->with('success', 'Data berhasil diubah!');
