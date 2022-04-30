@@ -26,13 +26,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
-Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', LogoutController::class)->name('logout');
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'authenticate']);
+});
+
 
 
 Route::name('backend.')->prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
+
+    Route::post('/logout', LogoutController::class)->name('logout');
 
     Route::resources([
         'sliders' => SliderController::class,
