@@ -31,9 +31,10 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/login', [LoginController::class, 'authenticate']);
 });
 
+Route::post('/logout', LogoutController::class)->name('logout');
+
 Route::name('backend.')->prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
-    Route::post('/logout', LogoutController::class)->name('logout');
 
     Route::resources([
         'sliders' => SliderController::class,
