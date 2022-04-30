@@ -33,11 +33,12 @@ class ArticleController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Article  $article
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show(Article $article): View
     {
-        $randomArticles = Article::select(['id', 'title', 'slug', 'body', 'thumbnail', 'is_active'])->where('is_active', 1)->inRandomOrder(3)->get();
+        $randomArticles = Article::select(['id', 'title', 'slug', 'body', 'thumbnail', 'is_active'])
+            ->where('is_active', 1)->inRandomOrder()->limit(3)->get();
 
         $article->increment('views', 1);
 
