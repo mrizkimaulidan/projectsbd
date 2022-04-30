@@ -14,11 +14,21 @@ class Article extends Model
 
     protected $fillable = ['user_id', 'title', 'slug', 'body', 'thumbnail', 'is_active', 'published_at'];
 
+    /**
+     * Get user relationship data.
+     *
+     * @return BelongsTo
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * Get comments relationship data.
+     *
+     * @return HasMany
+     */
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class, 'article_id');
@@ -37,6 +47,12 @@ class Article extends Model
             ->orWhere('body', 'LIKE', '%' . $keyword . '%');
     }
 
+    /**
+     * Scope a query where is active true.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function scopeActive(Builder $query)
     {
         return $query->where('is_active', 1);

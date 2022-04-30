@@ -11,7 +11,7 @@ class UpdateUserRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,7 +21,7 @@ class UpdateUserRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => ['required', 'min:3', 'max:255'],
@@ -31,7 +31,12 @@ class UpdateUserRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages(): array
     {
         return [
             'name.required' => 'Kolom nama lengkap wajib diisi!',

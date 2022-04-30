@@ -11,7 +11,7 @@ class StoreArticleRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,7 +21,7 @@ class StoreArticleRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'title' => ['required', 'min:3', 'max:255'],
@@ -32,7 +32,12 @@ class StoreArticleRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages(): array
     {
         return [
             'title.required' => 'Kolom judul wajib diisi!',

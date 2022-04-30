@@ -43,6 +43,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Get articles relationship data.
+     *
+     * @return HasMany
+     */
     public function articles(): HasMany
     {
         return $this->hasMany(Article::class);
