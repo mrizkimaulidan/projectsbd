@@ -15,7 +15,7 @@ class GalleryController extends Controller
      */
     public function index(): View
     {
-        $galleries = Gallery::select(['title', 'description', 'image', 'is_active'])->where('is_active', 1)->paginate(12);
+        $galleries = Gallery::select(['title', 'description', 'image', 'is_active'])->active()->paginate(12);
 
         return view('frontend.galleries.index', compact('galleries'));
     }

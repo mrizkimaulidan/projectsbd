@@ -17,11 +17,11 @@ class FrontendController extends Controller
      */
     public function index(): View
     {
-        $sliders = Slider::select(['title', 'description', 'image', 'is_active'])->where('is_active', 1)->get();
+        $sliders = Slider::select(['title', 'description', 'image', 'is_active'])->active()->get();
         $articleLimit2 = Article::select(['title', 'slug', 'body', 'thumbnail', 'is_active'])->latest()->limit(2)->get();
         $articles = Article::with(['user:id,name'])->select(['user_id', 'title', 'slug', 'body', 'thumbnail', 'is_active', 'views', 'published_at'])
-            ->where('is_active', 1)->latest()->limit(6)->get();
-        $galleries = Gallery::select(['title', 'description', 'is_active', 'image'])->where('is_active', 1)->oldest()->limit(12)->get();
+            ->active()->latest()->limit(6)->get();
+        $galleries = Gallery::select(['title', 'description', 'is_active', 'image'])->active()->oldest()->limit(12)->get();
 
         return view('frontend.index', compact('sliders', 'articleLimit2', 'articles', 'galleries'));
     }
