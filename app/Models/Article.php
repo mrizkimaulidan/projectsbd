@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,5 +22,23 @@ class Article extends Model
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class, 'article_id');
+    }
+
+    /**
+     * Scope a query to only include popular users.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param mixed  $keyword
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSearch(Builder $query, mixed $keyword)
+    {
+        return $query->where('title', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('body', 'LIKE', '%' . $keyword . '%');
+    }
+
+    public function scopeActive(Builder $query)
+    {
+        return $query->where('is_active', 1);
     }
 }

@@ -16,15 +16,11 @@ class ArticleController extends Controller
     public function index(): View
     {
         $articles = Article::with(['user:id,name'])
-            ->select(['user_id', 'title', 'slug', 'body', 'thumbnail', 'is_active', 'views', 'published_at'])->latest();
+            ->select(['user_id', 'title', 'slug', 'body', 'thumbnail', 'is_active', 'views', 'published_at'])->active()->latest();
 
-        if (request()->has('search')) {
-            $articles = $articles->where('title', 'LIKE', '%' . request()->search . '%')
-                ->orWhere('body', 'LIKE', '%' . request()->search . '%')
-                ->paginate(9);
-        } else {
-            $articles = $articles->where('is_active', 1)->paginate(9);
-        }
+        $articles = request()->has('search')
+            ? $articles->search(request()->search)->paginate(9)
+            : $articles->paginate(9);
 
         return view('frontend.articles.index', compact('articles'));
     }
@@ -38,7 +34,7 @@ class ArticleController extends Controller
     public function show(Article $article): View
     {
         $randomArticles = Article::select(['id', 'title', 'slug', 'body', 'thumbnail', 'is_active'])
-            ->where('is_active', 1)->inRandomOrder()->limit(3)->get();
+            ->active()->inRandomOrder()->limit(3)->get();
 
         $article->increment('views', 1);
 
