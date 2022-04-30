@@ -17,7 +17,8 @@ class NewestCommentController extends Controller implements VerifyCommentInterfa
      */
     public function index(): View
     {
-        $newestComments = Comment::with('article:id,title')->select(['id', 'article_id', 'name', 'email', 'body', 'date'])->where('is_verified', 0)->latest()->paginate(5);
+        $newestComments = Comment::with('article:id,title')->select(['id', 'article_id', 'name', 'email', 'body', 'date'])
+            ->isVerified(false)->latest()->paginate(5);
 
         return view('backend.comments.newest_comments.index', compact('newestComments'));
     }
