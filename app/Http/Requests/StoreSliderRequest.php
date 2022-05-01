@@ -44,8 +44,8 @@ class StoreSliderRequest extends FormRequest
             'title.max' => 'Kolom judul maksimal 255 karakter!',
 
             'description.required' => 'Kolom deskripsi wajib diisi!',
-            'description.min' => 'Kolom judul minimal 3 karakter!',
-            'description.max' => 'Kolom judul maksimal 255 karakter!',
+            'description.min' => 'Kolom deskripsi minimal 3 karakter!',
+            'description.max' => 'Kolom deskripsi maksimal 255 karakter!',
 
             'image.required' => 'Kolom gambar wajib diisi!',
             'image.image' => 'File yang diupload bukan gambar!',

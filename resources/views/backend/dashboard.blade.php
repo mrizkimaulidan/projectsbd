@@ -84,7 +84,7 @@
 
                   <div class="text-end">
                     <i class="fas fa-calendar"></i>
-                    {{ date('d-m-Y', strtotime($comment->date)) }}
+                    {{ date('d-m-Y H:i', strtotime($comment->date)) }}
                   </div>
                 </button>
               </h2>

@@ -33,8 +33,8 @@
                 <label for="is_active">Aktif/Tidak Aktif :</label>
                 <select name="is_active" id="is_active" class="form-select @error('is_active') is-invalid @enderror">
                   <option value="">Pilih..</option>
-                  <option value="1">Aktif</option>
-                  <option value="0">Tidak Aktif</option>
+                  <option value="1" @selected(old('is_active')==="1" )>Aktif</option>
+                  <option value="0" @selected(old('is_active')==="0" )>Tidak Aktif</option>
                 </select>
                 @error('is_active')
                 <small class="text-danger">{{ $errors->first('is_active') }}</small>

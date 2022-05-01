@@ -22,7 +22,7 @@
                 <label for="description" class="form-label">Deskripsi :</label>
                 <textarea name="description" id="description" value="{{ old('description') }}"
                   class="form-control @error('description') is-invalid @enderror" rows="3"
-                  placeholder="Masukkan deskripsi.."></textarea>
+                  placeholder="Masukkan deskripsi..">{{ old('description') }}</textarea>
                 @error('description')
                 <small class="text-danger">{{ $errors->first('description') }}</small>
                 @enderror
@@ -33,8 +33,8 @@
                 <label for="is_active">Aktif/Tidak Aktif :</label>
                 <select name="is_active" id="is_active" class="form-select @error('is_active') is-invalid @enderror">
                   <option value="">Pilih..</option>
-                  <option value="1">Aktif</option>
-                  <option value="0">Tidak Aktif</option>
+                  <option value="1" @selected(old('is_active')==="1" )>Aktif</option>
+                  <option value="0" @selected(old('is_active')==="0" )>Tidak Aktif</option>
                 </select>
                 @error('is_active')
                 <small class="text-danger">{{ $errors->first('is_active') }}</small>

@@ -44,7 +44,8 @@ class StoreArticleRequest extends FormRequest
             'title.min' => 'Kolom judul minimal 3 karakter!',
             'title.max' => 'Kolom judul maksimal 255 karakter!',
 
-            'slug.required' => 'Kolom slug maksimal 255 karakter',
+            'slug.required' => 'Kolom slug wajib diisi',
+            'slug.max' => 'Kolom slug maksimal 255 karakter!',
 
             'is_active.required' => 'Kolom status aktif/tidak aktif wajib diisi!',
 
