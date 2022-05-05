@@ -50,6 +50,12 @@ $ php artisan migrate --seed
 $ php artisan key:generate
 ```
 
+-   Membuat symbolic link untuk folder storage
+
+```bash
+$ php artisan storage:link
+```
+
 -   Ketik perintah dibawah ini untuk membuat cache baru dari beberapa konfigurasi yang telah diubah
 
 ```bash
