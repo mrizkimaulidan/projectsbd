@@ -52,7 +52,7 @@ class ArticleController extends Controller
         $validated['user_id'] = auth()->id();
 
         if ($request->file('thumbnail')) {
-            $fileName = $this->fileStorageRepository->uploadTo($request, 'thumbnail', 'local', 'public/articles');
+            $fileName = $this->fileStorageRepository->handleFileUpload($request, 'thumbnail', 'local', 'public/articles');
 
             $validated['thumbnail'] = $fileName;
         }
@@ -98,9 +98,9 @@ class ArticleController extends Controller
         if ($request->file('thumbnail')) {
             $path = 'public/articles/' . $article->thumbnail;
 
-            $this->fileStorageRepository->remove($path);
+            $this->fileStorageRepository->removeFile($path);
 
-            $fileName = $this->fileStorageRepository->uploadTo($request, 'thumbnail', 'local', 'public/articles');
+            $fileName = $this->fileStorageRepository->handleFileUpload($request, 'thumbnail', 'local', 'public/articles');
 
             $validated['thumbnail'] = $fileName;
         }
@@ -120,7 +120,7 @@ class ArticleController extends Controller
     {
         $path = 'public/sliders/' . $article->thumbnail;
 
-        $this->fileStorageRepository->remove($path);
+        $this->fileStorageRepository->removeFile($path);
 
         $article->delete();
 

@@ -51,7 +51,7 @@ class GalleryController extends Controller
         $validated = $request->validated();
 
         if ($request->file('image')) {
-            $fileName = $this->fileStorageRepository->uploadTo($request, 'image', 'local', 'public/galleries');
+            $fileName = $this->fileStorageRepository->handleFileUpload($request, 'image', 'local', 'public/galleries');
 
             $validated['image'] = $fileName;
         }
@@ -97,9 +97,9 @@ class GalleryController extends Controller
         if ($request->file('image')) {
             $path = 'public/galleries/' . $gallery->image;
 
-            $this->fileStorageRepository->remove($path);
+            $this->fileStorageRepository->removeFile($path);
 
-            $fileName = $this->fileStorageRepository->uploadTo($request, 'image', 'local', 'public/galleries');
+            $fileName = $this->fileStorageRepository->handleFileUpload($request, 'image', 'local', 'public/galleries');
 
             $validated['image'] = $fileName;
         }
@@ -118,7 +118,7 @@ class GalleryController extends Controller
     public function destroy(Gallery $gallery): RedirectResponse
     {
         $path = 'public/galleries/' . $gallery->image;
-        $this->fileStorageRepository->remove($path);
+        $this->fileStorageRepository->removeFile($path);
 
         $gallery->delete();
 

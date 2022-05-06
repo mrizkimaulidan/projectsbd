@@ -51,7 +51,7 @@ class SliderController extends Controller
         $validated = $request->validated();
 
         if ($request->file('image')) {
-            $fileName = $this->fileStorageRepository->uploadTo($request, 'image', 'local', 'public/sliders');
+            $fileName = $this->fileStorageRepository->handleFileUpload($request, 'image', 'local', 'public/sliders');
 
             $validated['image'] = $fileName;
         }
@@ -98,10 +98,10 @@ class SliderController extends Controller
             $path = 'public/sliders/' . $slider->image;
 
             // remove the old file
-            $this->fileStorageRepository->remove($path);
+            $this->fileStorageRepository->removeFile($path);
 
             // upload the new file.
-            $fileName = $fileName = $this->fileStorageRepository->uploadTo($request, 'image', 'local', 'public/sliders');
+            $fileName = $fileName = $this->fileStorageRepository->handleFileUpload($request, 'image', 'local', 'public/sliders');
 
             $validated['image'] = $fileName;
         }
@@ -121,7 +121,7 @@ class SliderController extends Controller
     {
         $path = 'public/sliders/' . $slider->image;
 
-        $this->fileStorageRepository->remove($path);
+        $this->fileStorageRepository->removeFile($path);
 
         $slider->delete();
 

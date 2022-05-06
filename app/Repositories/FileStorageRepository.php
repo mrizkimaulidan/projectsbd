@@ -17,7 +17,7 @@ class FileStorageRepository
      * @param string $path path to upload.
      * @return string
      */
-    public function uploadTo(Request $request, string $key, string $driver = 'local', string $path): string
+    public function handleFileUpload(Request $request, string $key, string $driver = 'local', string $path): string
     {
         $file = $request->file($key);
 
@@ -32,7 +32,7 @@ class FileStorageRepository
      * @param string $path
      * @return void
      */
-    public function remove(string $path): void
+    public function removeFile(string $path): void
     {
         if (Storage::get($path)) {
             Storage::delete($path);
