@@ -124,7 +124,7 @@
         5 Artikel Terpopuler
       </div>
       <div class="card-body">
-        <table class="table">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th scope="col">#</th>
