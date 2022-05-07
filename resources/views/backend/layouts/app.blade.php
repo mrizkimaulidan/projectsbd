@@ -27,6 +27,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Summernote -->
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -102,12 +104,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
   <script src="{{ asset('plugins/summernote/lang/summernote-id-ID.min.js') }}"></script>
 
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
 
   @stack('js')
   @stack('modal')
 
   <script>
     $(function () {
+      $('.datatable').DataTable({
+        "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
+        language: {
+          url: "https://cdn.datatables.net/plug-ins/1.11.5/i18n/id.json"
+        }
+      });
+
       $('.delete').click(function (e) {
         e.preventDefault();
         Swal.fire({

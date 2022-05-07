@@ -12,7 +12,7 @@
           </a>
         </div>
         <div class="table-responsive">
-          <table class="table">
+          <table class="table datatable">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -23,7 +23,7 @@
               </tr>
             </thead>
             <tbody>
-              @forelse ($sliders as $slider)
+              @foreach ($sliders as $slider)
               <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ str()->limit($slider->title, 50) }}</td>
@@ -54,15 +54,10 @@
                   </div>
                 </td>
               </tr>
-              @empty
-              <td colspan="5" class="text-center">
-                <div class="fw-bold text-danger text-uppercase">Kosong!</div>
-              </td>
-              @endforelse
+              @endforeach
             </tbody>
           </table>
         </div>
-        {{ $sliders->links('pagination::bootstrap-5') }}
       </div>
     </div>
   </div>

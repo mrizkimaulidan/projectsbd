@@ -7,7 +7,7 @@
       <div class="card-body">
         @include('utilities.alert')
         <div class="table-responsive">
-          <table class="table">
+          <table class="table datatable">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -20,7 +20,7 @@
               </tr>
             </thead>
             <tbody>
-              @forelse ($oldestComments as $oldestComment)
+              @foreach ($oldestComments as $oldestComment)
               <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ str()->limit($oldestComment->article->title, 50) }}</td>
@@ -52,15 +52,10 @@
                   </div>
                 </td>
               </tr>
-              @empty
-              <td colspan="7" class="text-center">
-                <div class="fw-bold text-danger text-uppercase">Kosong!</div>
-              </td>
-              @endforelse
+              @endforeach
             </tbody>
           </table>
         </div>
-        {{ $oldestComments->links('pagination::bootstrap-5') }}
       </div>
     </div>
   </div>

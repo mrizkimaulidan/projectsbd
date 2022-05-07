@@ -12,7 +12,7 @@
           </a>
         </div>
         <div class="table-responsive">
-          <table class="table">
+          <table class="table datatable">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -24,7 +24,7 @@
               </tr>
             </thead>
             <tbody>
-              @forelse ($articles as $article)
+              @foreach ($articles as $article)
               <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ str()->limit($article->title, 50) }}</td>
@@ -59,15 +59,10 @@
                   </div>
                 </td>
               </tr>
-              @empty
-              <td colspan="6" class="text-center">
-                <div class="fw-bold text-danger text-uppercase">Kosong!</div>
-              </td>
-              @endforelse
+              @endforeach
             </tbody>
           </table>
         </div>
-        {{ $articles->links('pagination::bootstrap-5') }}
       </div>
     </div>
   </div>

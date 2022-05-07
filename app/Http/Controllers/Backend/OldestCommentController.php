@@ -18,7 +18,7 @@ class OldestCommentController extends Controller implements VerifyCommentInterfa
     public function index(): View
     {
         $oldestComments = Comment::with('article:id,title')->select(['id', 'article_id', 'name', 'email', 'body', 'date', 'verified_by'])
-            ->isVerified(true)->latest()->paginate(5);
+            ->isVerified(true)->latest()->get();
 
         return view('backend.comments.oldest_comments.index', compact('oldestComments'));
     }

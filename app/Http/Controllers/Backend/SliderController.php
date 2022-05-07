@@ -25,7 +25,7 @@ class SliderController extends Controller
      */
     public function index(): View
     {
-        $sliders = Slider::select(['id', 'title', 'image', 'is_active'])->orderBy('title')->latest()->paginate(5);
+        $sliders = Slider::select(['id', 'title', 'image', 'is_active'])->orderBy('title')->latest()->get();
 
         return view('backend.sliders.index', compact('sliders'));
     }

@@ -12,7 +12,7 @@
           </button>
         </div>
         <div class="table-responsive">
-          <table class="table">
+          <table class="table datatable">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -23,7 +23,7 @@
               </tr>
             </thead>
             <tbody>
-              @forelse ($users as $user)
+              @foreach ($users as $user)
               <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $user->name }}</td>
@@ -40,11 +40,7 @@
                   </div>
                 </td>
               </tr>
-              @empty
-              <td colspan="4" class="text-center">
-                <div class="fw-bold text-danger text-uppercase">Kosong!</div>
-              </td>
-              @endforelse
+              @endforeach
             </tbody>
           </table>
         </div>
