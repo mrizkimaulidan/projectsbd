@@ -69,12 +69,9 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\JsonResponse
      */
-    public function edit(User $user): JsonResponse
+    public function edit(User $user)
     {
-        return response()->json([
-            'code' => Response::HTTP_OK,
-            'data' => $user
-        ], Response::HTTP_OK);
+        abort(404);
     }
 
     /**

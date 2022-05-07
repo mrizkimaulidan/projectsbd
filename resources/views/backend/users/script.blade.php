@@ -2,7 +2,7 @@
   $(function () {
     $('.edit').click(function () {
       let id = $(this).data('id');
-      let url = "{{ route('backend.users.edit', 'id') }}";
+      let url = "{{ route('api.users.show', 'id') }}";
       url = url.replace('id', id);
 
       let updateUrl = "{{ route('backend.users.update', 'id') }}";
