@@ -28,7 +28,7 @@
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
-                <td>{{ $user->created_at->format('d-m-Y H:i:s') }}</td>
+                <td>{{ $user->created_at->format('d-m-Y H:i') }}</td>
                 <td>
                   <div class="btn-group" role="group">
                     @if(auth()->id() === $user->id)
